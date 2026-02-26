@@ -1,43 +1,26 @@
-const CACHE_VERSION = '3.1.0';
+const CACHE_VERSION = '3.2.0';
 const CACHE_NAME = `hesablayici-v${CACHE_VERSION}`;
 
 // Əsas fayllar - mütləq cache edilməli
 const CORE_ASSETS = [
   '/',
-  '/index.html',
-  '/styles.css',
-  '/app.js',
-  '/manifest.json'
+  'index.html',
+  'styles.css',
+  'app.js',
+  'manifest.json',
+  'icon-192.png',
+  'icon-512.png'
 ];
 
-// İkon faylları - seçimli
-const OPTIONAL_ASSETS = [
-  '/icon-192.png',
-  '/icon-512.png'
-];
-
-// Install event - yalnız əsas faylları cache et
+// Install event - bütün faylları cache et
 self.addEventListener('install', event => {
   console.log('[SW] Installing Service Worker v' + CACHE_VERSION);
   
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('[SW] Caching core assets');
-        // Əvvəlcə əsas faylları cache et
+        console.log('[SW] Caching all assets');
         return cache.addAll(CORE_ASSETS);
-      })
-      .then(() => {
-        // İkonları ayrıca cache et (uğursuz olsa da davam etsin)
-        return caches.open(CACHE_NAME).then(cache => {
-          return Promise.all(
-            OPTIONAL_ASSETS.map(url => {
-              return cache.add(url).catch(err => {
-                console.warn('[SW] Optional asset failed:', url);
-              });
-            })
-          );
-        });
       })
       .then(() => {
         console.log('[SW] Installation complete, activating immediately');

@@ -1,6 +1,7 @@
-// PWA Install - Optimized
+// PWA Install - Optimized with visibility control
 let deferredPrompt;
 let isOnline = navigator.onLine;
+let canInstall = false;
 
 // Online/Offline detection
 window.addEventListener('online', () => {
@@ -15,26 +16,70 @@ window.addEventListener('offline', () => {
 
 // PWA Install prompt
 window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('[App] beforeinstallprompt event fired');
     e.preventDefault();
     deferredPrompt = e;
+    canInstall = true;
+    
     const installBtn = document.getElementById('installBtn');
+    const installBtnText = document.getElementById('installBtnText');
+    
     if (installBtn) {
         installBtn.style.display = 'flex';
+        if (installBtnText) {
+            installBtnText.textContent = 'Tətbiq quraşdır';
+        }
     }
 });
 
 // Install button click handler
 document.addEventListener('DOMContentLoaded', () => {
     const installBtn = document.getElementById('installBtn');
+    const installBtnText = document.getElementById('installBtnText');
+    
     if (installBtn) {
+        // Show button initially if not installed
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+            // Already installed
+            installBtn.style.display = 'none';
+            console.log('[App] Already installed as PWA');
+        } else {
+            // Not installed yet
+            installBtn.style.display = 'flex';
+            console.log('[App] Not installed yet, showing install button');
+        }
+        
         installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                console.log('[App] Install outcome:', outcome);
-                deferredPrompt = null;
-                installBtn.style.display = 'none';
+            if (!deferredPrompt) {
+                console.log('[App] No install prompt available yet');
+                if (installBtnText) {
+                    installBtnText.textContent = 'Gözləyin...';
+                }
+                
+                // Check if already installed
+                if (window.matchMedia('(display-mode: standalone)').matches) {
+                    alert('Tətbiq artıq quraşdırılıb!');
+                    installBtn.style.display = 'none';
+                } else {
+                    alert('Brauzer tətbiq quraşdırma dəstəkləmir və ya səhifə HTTPS üzərində deyil.\n\nChrome/Edge brauzerdə HTTPS saytda açın.');
+                }
+                return;
             }
+            
+            console.log('[App] Showing install prompt');
+            deferredPrompt.prompt();
+            
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log('[App] Install outcome:', outcome);
+            
+            if (outcome === 'accepted') {
+                console.log('[App] User accepted installation');
+            } else {
+                console.log('[App] User dismissed installation');
+            }
+            
+            deferredPrompt = null;
+            canInstall = false;
         });
     }
 });
@@ -45,6 +90,7 @@ window.addEventListener('appinstalled', () => {
     if (installBtn) {
         installBtn.style.display = 'none';
     }
+    alert('✅ Tətbiq uğurla quraşdırıldı!');
 });
 
 // Service Worker Registration - Optimized
