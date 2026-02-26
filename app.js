@@ -66,8 +66,14 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Save scroll position before opening calculator
+let savedScrollPosition = 0;
+
 // Navigation Functions
 function openCalculator(type) {
+    // Save current scroll position
+    savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
     document.getElementById('mainMenu').style.display = 'none';
     document.querySelector('.info-btn').style.display = 'none';
     
@@ -86,6 +92,9 @@ function openCalculator(type) {
     } else if (type === 'links') {
         document.getElementById('linksCalc').style.display = 'block';
     }
+    
+    // Scroll to top of calculator
+    window.scrollTo(0, 0);
 }
 
 function backToMenu() {
@@ -98,6 +107,11 @@ function backToMenu() {
     document.getElementById('infoCalc').style.display = 'none';
     document.getElementById('linksCalc').style.display = 'none';
     document.querySelector('.info-btn').style.display = 'block';
+    
+    // Restore scroll position
+    setTimeout(() => {
+        window.scrollTo(0, savedScrollPosition);
+    }, 50);
     
     // Clear inputs
     document.getElementById('seminarCount').value = '';
@@ -549,14 +563,38 @@ function calculateAge() {
     `;
 }
 
-// App opener for mobile
+// App opener for mobile with user confirmation
 function openApp(appUrl, webUrl) {
+    // Try to open app directly
     const start = Date.now();
-    window.location.href = appUrl;
+    const hidden = window.open(appUrl, '_blank');
+    
+    // If app doesn't open within 2 seconds, open web version
+    setTimeout(() => {
+        if (Date.now() - start < 2000) {
+            if (hidden) {
+                hidden.close();
+            }
+            window.open(webUrl, '_blank');
+        }
+    }, 1500);
+}
+
+// WhatsApp opener for mobile
+function openWhatsApp() {
+    const phoneNumber = '994559406018';
+    const whatsappUrl = `whatsapp://send?phone=${phoneNumber}`;
+    const webUrl = `https://wa.me/${phoneNumber}`;
+    
+    const start = Date.now();
+    const hidden = window.open(whatsappUrl, '_blank');
     
     setTimeout(() => {
         if (Date.now() - start < 2000) {
-            window.location.href = webUrl;
+            if (hidden) {
+                hidden.close();
+            }
+            window.open(webUrl, '_blank');
         }
     }, 1500);
 }
