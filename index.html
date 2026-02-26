@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4F46E5">
+    <meta name="description" content="Universitet bal hesablama, ÜOMG, 25% ödəniş və yaş hesablayıcı sistemi">
+    <title>Universitet Bal Hesablayıcı</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SXKXY8WJDK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SXKXY8WJDK');
+</script>
+</head>
+<body>
+    <!-- WhatsApp Banner -->
+    <div class="whatsapp-banner">
+        <div class="banner-content">
+            <span class="banner-text">⭐ Ən ucuz sərbəst iş hazırlanması:</span>
+            <a href="https://wa.me/994559406018" target="_blank" class="whatsapp-btn" aria-label="WhatsApp ilə əlaqə">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Install App Button -->
+    <button id="installBtn" class="install-btn" style="display: none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </svg>
+        Tətbiq quraşdır
+    </button>
+
+    <!-- Main Container -->
+    <div id="mainMenu" class="main-menu">
+        <h1 class="main-title">Universitet Bal Hesablayıcı</h1>
+        <div class="calculator-grid">
+            <div class="calc-card" onclick="openCalculator('semester')">
+                <div class="calc-icon">📚</div>
+                <h2>Semestr Bal Hesablama</h2>
+                <p>Seminar, kollekvium, sərbəst iş və davamiyyət ballarını hesablayın</p>
+            </div>
+            <div class="calc-card" onclick="openCalculator('uomg')">
+                <div class="calc-icon">🎓</div>
+                <h2>ÜOMG Hesablama</h2>
+                <p>Fənn ballarına əsasən ümumi orta məktəb göstəricisini hesablayın</p>
+            </div>
+            <div class="calc-card" onclick="openCalculator('payment')">
+                <div class="calc-icon">💰</div>
+                <h2>25% Ödəniş Hesablama</h2>
+                <p>Kəsr pulu və imtahan ödənişini hesablayın</p>
+            </div>
+            <div class="calc-card" onclick="openCalculator('age')">
+                <div class="calc-icon">🎂</div>
+                <h2>Yaş Hesablayıcı</h2>
+                <p>Yaşınızı, yaşadığınız günləri və ad gününüzə qalan vaxtı öyrənin</p>
+            </div>
+            <div class="calc-card" onclick="openCalculator('dictionary')">
+                <div class="calc-icon">📖</div>
+                <h2>Akademik Lüğət</h2>
+                <p>Universitet həyatında tez-tez rast gəlinən terminlər</p>
+            </div>
+            <div class="calc-card" onclick="openCalculator('info')">
+                <div class="calc-icon">ℹ️</div>
+                <h2>Məlumat</h2>
+                <p>Universitet qaydaları və faydalı məlumatlar</p>
+            </div>
+            <div class="calc-card" onclick="openCalculator('links')">
+                <div class="calc-icon">🔗</div>
+                <h2>Sürətli Linklər</h2>
+                <p>BDU və digər faydalı linklər</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Semester Calculator -->
+    <div id="semesterCalc" class="calculator-container" style="display: none;">
+        <button class="back-btn" onclick="backToMenu()">← Geri</button>
+        <h1 class="calc-title">Semestr Bal Hesablama</h1>
+        
+        <div class="input-group">
+            <label>Seminar bal sayını daxil edin:</label>
+            <input type="number" id="seminarCount" min="1" max="11" placeholder="Məsələn: 5">
+            <button onclick="generateSeminarInputs()" class="generate-btn">Yarat</button>
+        </div>
+
+        <div id="seminarInputs"></div>
+
+        <div class="input-group">
+            <label>Kollekvium qiymət sayını daxil edin:</label>
+            <input type="number" id="kollokCount" min="1" max="4" placeholder="Məsələn: 3">
+            <button onclick="generateKollokInputs()" class="generate-btn">Yarat</button>
+        </div>
+
+        <div id="kollokInputs"></div>
+
+        <div class="input-group">
+            <label>Sərbəst iş qiyməti (0-10):</label>
+            <input type="number" id="serbest" min="0" max="10" step="0.1" placeholder="0-10 arası">
+        </div>
+
+        <div class="input-group">
+            <label>Saat seçin:</label>
+            <select id="hourSelect">
+                <option value="">Seçin</option>
+                <option value="30">30 saat</option>
+                <option value="45">45 saat</option>
+                <option value="60">60 saat</option>
+                <option value="75">75 saat</option>
+                <option value="90">90 saat</option>
+                <option value="105">105 saat</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Qayıb sayı:</label>
+            <input type="number" id="absences" min="0" placeholder="Qayıb sayını daxil edin">
+        </div>
+
+        <button onclick="calculateSemester()" class="calculate-btn">Hesabla</button>
+
+        <div id="semesterResult" class="result-box"></div>
+    </div>
+
+    <!-- UOMG Calculator -->
+    <div id="uomgCalc" class="calculator-container" style="display: none;">
+        <button class="back-btn" onclick="backToMenu()">← Geri</button>
+        <h1 class="calc-title">ÜOMG Hesablama</h1>
+        
+        <div class="input-group">
+            <label>Fənn sayını daxil edin:</label>
+            <input type="number" id="subjectCount" min="1" max="20" placeholder="Məsələn: 8">
+            <button onclick="generateSubjectInputs()" class="generate-btn">Yarat</button>
+        </div>
+
+        <div id="subjectInputs"></div>
+
+        <button onclick="calculateUOMG()" class="calculate-btn" style="display: none;" id="uomgCalcBtn">Hesabla</button>
+
+        <div id="uomgResult" class="result-box"></div>
+    </div>
+
+    <!-- Payment Calculator -->
+    <div id="paymentCalc" class="calculator-container" style="display: none;">
+        <button class="back-btn" onclick="backToMenu()">← Geri</button>
+        <h1 class="calc-title">25% Ödəniş Hesablama</h1>
+        
+        <div class="input-group">
+            <label>İxtisasın illik ödənişi (AZN):</label>
+            <input type="number" id="yearlyPayment" min="0" placeholder="Məsələn: 3600">
+        </div>
+
+        <div class="input-group">
+            <label>Fənnin kredit sayı:</label>
+            <input type="number" id="creditCount" min="1" placeholder="Məsələn: 5">
+        </div>
+
+        <button onclick="calculatePayment()" class="calculate-btn">Hesabla</button>
+
+        <div id="paymentResult" class="result-box"></div>
+    </div>
+
+    <!-- Age Calculator -->
+    <div id="ageCalc" class="calculator-container" style="display: none;">
+        <button class="back-btn" onclick="backToMenu()">← Geri</button>
+        <h1 class="calc-title">Yaş Hesablayıcı</h1>
+        
+        <div class="input-group">
+            <label>Doğum tarixinizi daxil edin (GG.AA.IIII):</label>
+            <input type="text" id="birthDate" placeholder="31.12.2000" maxlength="10">
+        </div>
+
+        <button onclick="calculateAge()" class="calculate-btn">Hesabla</button>
+
+        <div id="ageResult" class="result-box"></div>
+    </div>
+
+    <!-- Dictionary -->
+    <div id="dictionaryCalc" class="calculator-container" style="display: none;">
+        <button class="back-btn" onclick="backToMenu()">← Geri</button>
+        <h1 class="calc-title">Akademik Lüğət</h1>
+        
+        <div class="dictionary-content">
+            <div class="dict-item">
+                <div class="dict-term">Mühazirə</div>
+                <div class="dict-definition">Müəllimin keçdiyi dərs</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Section -->
+    <div id="infoCalc" class="calculator-container" style="display: none;">
+        <button class="back-btn" onclick="backToMenu()">← Geri</button>
+        <h1 class="calc-title">Məlumat</h1>
+        
+        <div class="info-content">
+            <div class="info-item">
+                <div class="info-title">📌 Əlaçı olmaq üçün</div>
+                <div class="info-text">Bütün fənnlər 91+ olmalıdır</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div id="linksCalc" class="calculator-container" style="display: none;">
+        <button class="back-btn" onclick="backToMenu()">← Geri</button>
+        <h1 class="calc-title">Sürətli Linklər</h1>
+        
+        <div class="links-content">
+            <a href="https://share.google/M2ZIeZ1uGX63hbYwN" target="_blank" class="link-item">
+                <div class="link-icon">🏛️</div>
+                <div class="link-text">BDU Rəsmi Sayt</div>
+            </a>
+            <a href="https://share.google/7ljpthpUCiOMOeS82" target="_blank" class="link-item">
+                <div class="link-icon">📚</div>
+                <div class="link-text">SemsLogin - Akademik Portal</div>
+            </a>
+            <a href="https://whatsapp.com/channel/0029Va85Ls85q08WyYoGeJ3r" target="_blank" class="link-item">
+                <div class="link-icon">💬</div>
+                <div class="link-text">BDU WhatsApp Kanal</div>
+            </a>
+            <a href="https://www.instagram.com/bdu_eduaz" class="link-item" onclick="openApp('instagram://user?username=bdu_eduaz', this.href); return false;">
+                <div class="link-icon">📸</div>
+                <div class="link-text">BDU Instagram</div>
+            </a>
+            <a href="https://t.me/bdu_eduaz" class="link-item" onclick="openApp('tg://resolve?domain=bdu_eduaz', this.href); return false;">
+                <div class="link-icon">✈️</div>
+                <div class="link-text">BDU Telegram</div>
+            </a>
+            <a href="https://www.instagram.com/desespere_etoile" class="link-item" onclick="openApp('instagram://user?username=desespere_etoile', this.href); return false;">
+                <div class="link-icon">👤</div>
+                <div class="link-text">Sayt Sahibi Instagram</div>
+            </a>
+            <a href="https://t.me/+WUKxtnDjo2E5YTcy" class="link-item" onclick="openApp('tg://join?invite=WUKxtnDjo2E5YTcy', this.href); return false;">
+                <div class="link-icon">💭</div>
+                <div class="link-text">Tələbə Chat Qrupu</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Info Button -->
+    <button class="info-btn" onclick="showInfo()">i</button>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal" onclick="closeInfo()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeInfo()">&times;</span>
+            <div class="info-text">
+                <p>Bu sayt tələbələrin semestr ərzində topladıqları balları</p>
+                <p>hesablamaq və izləmək üçün yaradılıb.</p>
+                <br>
+                <p>İstifadəçilər fənlər üzrə nəticələrini daxil edərək ümumi</p>
+                <p>semestr balını asan və sürətli şəkildə görə bilərlər.</p>
+                <br>
+                <p>Saytın məqsədi hesablamanı daha rahat və əlçatan etməkdir.</p>
+                <br>
+                <p>Sayt Nurxan Tərəfindən Hazırlanıb.</p>
+                <br>
+                <p>©.Müəllif Hüquqları Qorunur (deyəsən).</p>
+                <br>
+                <p>Oxuduğunu düşünürsən.</p>
+                <p>Əslində isə səni oxuyurlar. @618…</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,692 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #4F46E5;
+    --primary-dark: #4338CA;
+    --secondary: #06B6D4;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+    --dark: #1F2937;
+    --light: #F9FAFB;
+    --gray: #6B7280;
+    --white: #FFFFFF;
+    --whatsapp: #25D366;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+
+/* WhatsApp Banner */
+.whatsapp-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, var(--whatsapp) 0%, #20b858 100%);
+    color: white;
+    padding: 12px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.banner-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.banner-text {
+    font-weight: 600;
+    font-size: 15px;
+    flex: 1;
+}
+
+.whatsapp-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.whatsapp-btn:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+.whatsapp-btn:hover svg path {
+    fill: var(--whatsapp);
+}
+
+/* Install Button */
+.install-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.install-btn:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+    animation: none;
+}
+
+/* Main Menu */
+.main-menu {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.main-title {
+    text-align: center;
+    color: white;
+    font-size: 42px;
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeInDown 0.8s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.calc-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.calc-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.calc-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.calc-card h2 {
+    color: var(--dark);
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.calc-card p {
+    color: var(--gray);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Calculator Container */
+.calculator-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.back-btn {
+    background: var(--gray);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: var(--dark);
+    transform: translateX(-5px);
+}
+
+.calc-title {
+    color: var(--dark);
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    color: var(--dark);
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #E5E7EB;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: var(--light);
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.generate-btn,
+.calculate-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.generate-btn:hover,
+.calculate-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+}
+
+.calculate-btn {
+    width: 100%;
+    padding: 16px;
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.dynamic-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 12px;
+}
+
+.dynamic-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.dynamic-input label {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.dynamic-input input {
+    padding: 10px 12px;
+    border: 2px solid #E5E7EB;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+}
+
+/* UOMG Specific Styles */
+.uomg-inputs {
+    margin-top: 20px;
+}
+
+.uomg-input-row {
+    background: var(--light);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.uomg-label {
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.uomg-inputs-group {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+}
+
+.uomg-score,
+.uomg-credit {
+    padding: 12px;
+    border: 2px solid #E5E7EB;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.uomg-score:focus,
+.uomg-credit:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.result-box {
+    margin-top: 30px;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 16px;
+    color: white;
+    font-size: 16px;
+    line-height: 1.8;
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.3);
+    animation: slideInUp 0.5s ease;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-box strong {
+    font-size: 18px;
+    display: block;
+    margin-top: 10px;
+}
+
+.result-box .final-score {
+    font-size: 36px;
+    font-weight: 800;
+    margin: 20px 0;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Dictionary Styles */
+.dictionary-content {
+    padding: 20px;
+}
+
+.dict-item {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--primary);
+}
+
+.dict-term {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.dict-definition {
+    font-size: 15px;
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+/* Info Section Styles */
+.info-content {
+    padding: 20px;
+}
+
+.info-item {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--success);
+}
+
+.info-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--success);
+    margin-bottom: 8px;
+}
+
+.info-text {
+    font-size: 15px;
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+/* Links Styles */
+.links-content {
+    padding: 20px;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--light);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: var(--dark);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.link-item:hover {
+    background: white;
+    border-color: var(--primary);
+    transform: translateX(10px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.link-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.link-text {
+    font-size: 16px;
+    font-weight: 600;
+    flex: 1;
+}
+
+/* Info Button */
+.info-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--dark);
+    color: white;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.info-btn:hover {
+    background: var(--primary);
+    transform: scale(1.1) rotate(15deg);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-content {
+    background: white;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 40px;
+    border-radius: 20px;
+    position: relative;
+    animation: scaleIn 0.4s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--danger);
+    transform: rotate(90deg);
+}
+
+.info-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--dark);
+    text-align: center;
+}
+
+.info-text p {
+    margin: 8px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    .calculator-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .calc-card {
+        padding: 30px 20px;
+    }
+
+    .calc-icon {
+        font-size: 48px;
+    }
+
+    .calculator-container {
+        padding: 30px 20px;
+        margin: 0 15px;
+    }
+
+    .calc-title {
+        font-size: 24px;
+    }
+
+    .banner-text {
+        font-size: 13px;
+    }
+
+    .dynamic-inputs {
+        grid-template-columns: 1fr;
+    }
+
+    .uomg-inputs-group {
+        grid-template-columns: 1fr;
+    }
+
+    .install-btn {
+        bottom: 90px;
+        right: 15px;
+        font-size: 13px;
+        padding: 10px 18px;
+    }
+
+    .info-btn {
+        bottom: 90px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .modal-content {
+        padding: 30px 20px;
+        margin: 30px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 55px;
+    }
+
+    .whatsapp-banner {
+        padding: 10px 15px;
+    }
+
+    .main-title {
+        font-size: 26px;
+    }
+
+    .calc-card h2 {
+        font-size: 20px;
+    }
+
+    .calc-title {
+        font-size: 20px;
+    }
+
+    .result-box .final-score {
+        font-size: 28px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .whatsapp-banner,
+    .install-btn,
+    .info-btn,
+    .back-btn {
+        display: none;
+    }
+
+    body {
+        background: white;
+    }
+
+    .calculator-container {
+        box-shadow: none;
+    }
+}
