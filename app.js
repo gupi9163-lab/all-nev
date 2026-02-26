@@ -1,66 +1,94 @@
-// PWA Install
+// PWA Install - Optimized
 let deferredPrompt;
+let isOnline = navigator.onLine;
 
+// Online/Offline detection
+window.addEventListener('online', () => {
+    isOnline = true;
+    console.log('[App] Online');
+});
+
+window.addEventListener('offline', () => {
+    isOnline = false;
+    console.log('[App] Offline - working from cache');
+});
+
+// PWA Install prompt
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    document.getElementById('installBtn').style.display = 'flex';
+    const installBtn = document.getElementById('installBtn');
+    if (installBtn) {
+        installBtn.style.display = 'flex';
+    }
 });
 
-document.getElementById('installBtn').addEventListener('click', async () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`Install ${outcome}`);
-        deferredPrompt = null;
-        document.getElementById('installBtn').style.display = 'none';
+// Install button click handler
+document.addEventListener('DOMContentLoaded', () => {
+    const installBtn = document.getElementById('installBtn');
+    if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log('[App] Install outcome:', outcome);
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+            }
+        });
     }
 });
 
 window.addEventListener('appinstalled', () => {
-    console.log('PWA installed');
-    document.getElementById('installBtn').style.display = 'none';
+    console.log('[App] PWA installed successfully');
+    const installBtn = document.getElementById('installBtn');
+    if (installBtn) {
+        installBtn.style.display = 'none';
+    }
 });
 
-// Service Worker Registration with auto-update
+// Service Worker Registration - Optimized
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(reg => {
-                console.log('Service Worker registered');
-                
-                // Check for updates every 60 seconds
-                setInterval(() => {
-                    reg.update();
-                }, 60000);
-                
-                // Listen for updates
-                reg.addEventListener('updatefound', () => {
-                    const newWorker = reg.installing;
-                    console.log('New service worker found');
-                    
-                    newWorker.addEventListener('statechange', () => {
-                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                            console.log('New version available, reloading...');
-                            // Send message to skip waiting
-                            newWorker.postMessage({ type: 'SKIP_WAITING' });
-                            // Reload page after a short delay
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 1000);
-                        }
-                    });
-                });
-            })
-            .catch(err => console.log('Service Worker registration failed', err));
+    // Register immediately, don't wait for load
+    navigator.serviceWorker.register('/sw.js', {
+        scope: '/',
+        updateViaCache: 'none'
+    })
+    .then(registration => {
+        console.log('[App] Service Worker registered:', registration.scope);
+        
+        // Check for updates on page load
+        registration.update();
+        
+        // Periodic update check (every 5 minutes)
+        setInterval(() => {
+            registration.update();
+        }, 300000);
+        
+        // Handle updates
+        registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            console.log('[App] New Service Worker found');
+            
+            newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    console.log('[App] New version available');
+                    // Silently activate new version
+                    newWorker.postMessage({ type: 'SKIP_WAITING' });
+                }
+            });
+        });
+    })
+    .catch(err => {
+        console.error('[App] Service Worker registration failed:', err);
     });
     
-    // Reload page when new service worker takes control
+    // Handle controller change
     let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (!refreshing) {
             refreshing = true;
-            console.log('Controller changed, reloading page');
+            console.log('[App] New Service Worker activated, reloading...');
             window.location.reload();
         }
     });

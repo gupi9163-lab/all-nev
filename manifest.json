@@ -3,10 +3,12 @@
   "short_name": "Hesablayıcı",
   "description": "Universitet bal hesablama, ÜOMG, 25% ödəniş və yaş hesablayıcı",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#667eea",
   "theme_color": "#4F46E5",
   "orientation": "portrait-primary",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/icon-192.png",
@@ -23,5 +25,22 @@
   ],
   "categories": ["education", "utilities"],
   "lang": "az",
-  "dir": "ltr"
+  "dir": "ltr",
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Semestr Bal",
+      "short_name": "Semestr",
+      "description": "Semestr balını hesablayın",
+      "url": "/?calculator=semester",
+      "icons": []
+    },
+    {
+      "name": "ÜOMG",
+      "short_name": "ÜOMG",
+      "description": "ÜOMG hesablayın",
+      "url": "/?calculator=uomg",
+      "icons": []
+    }
+  ]
 }
