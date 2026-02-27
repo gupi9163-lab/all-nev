@@ -118,17 +118,39 @@ body {
     z-index: 999;
     transition: all 0.3s ease;
     animation: bounce 2s infinite;
+    /* Performance */
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.install-btn.install-ready {
+    animation: pulse 1.5s infinite;
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%, 100% { transform: translateY(0) translateZ(0); }
+    50% { transform: translateY(-10px) translateZ(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        transform: scale(1) translateZ(0);
+        box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
+    }
+    50% { 
+        transform: scale(1.05) translateZ(0);
+        box-shadow: 0 12px 32px rgba(79, 70, 229, 0.6);
+    }
 }
 
 .install-btn:hover {
     background: var(--primary-dark);
-    transform: scale(1.05);
+    transform: scale(1.05) translateZ(0);
     animation: none;
+}
+
+.install-btn:active {
+    transform: scale(0.98) translateZ(0);
 }
 
 /* Main Menu */
